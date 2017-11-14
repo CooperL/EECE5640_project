@@ -11,9 +11,9 @@ void init_data(float*** data_arry) {
         (*data_arry)[i] = malloc(D*sizeof(float));
 }
 
-void free_data(float*** data_arry) {
+void free_matrix(float*** data_arry, int L) {
     int i;
-    for(i=0;i<N;i++)
+    for(i=0;i<L;i++)
         free((*data_arry)[i]);
     free(*data_arry);
 }

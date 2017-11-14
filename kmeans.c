@@ -1,3 +1,18 @@
+/***************************************************
+*  kmeans.c
+*  
+*  Compute kmeans for samples.csv
+*  labels are placed in label_out.csv
+*
+*  Final project for EECE5640
+*
+*  @author Cooper Loughlin
+*  @autor Brian Yarbrough
+*  @date November 2017
+*
+****************************************************/
+
+
 #include "project.h"
 #include "data.h"
 #include "kmeans.h"
@@ -21,12 +36,24 @@ int main(int argc, char* argv[]) {
     
     // split onto k nodes... later
 
-    // find mean
-    //calc_mean(data_arry, labels, mu);
     // calculate distance in each row
     int node_idx;
     for(node_idx = 0; node_idx < K; node_idx++)
         calc_distance(data_arry,mu,dist,node_idx);
+
+    // TODO: MPI Reduce
+
+    // select minimum distance
+    find_min_dist(labels, dist);
     
-    free_data(&data_arry);
+    // update mean
+    calc_mean(data_arry, labels, mu);
+
+
+    // clean up    
+    free_matrix(&data_arry, N);
+    free_matrix(&dist, N);
+free(mu[0]);
+    //free_matrix(&mu, 2);
+    free(labels);
 }
