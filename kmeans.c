@@ -23,16 +23,14 @@ int main(int argc, char* argv[]) {
     float** data_arry;
     init_data(&data_arry);
     int* labels = (int*)malloc(N*sizeof(int));
-    float ** mu;
-    float ** dist;
+    float** mu;
+    init_mu(data_arry, &mu);
+    float** dist;
     init_dist(&dist);
     FILE* data_fp = fopen(DATA_FILE,"r");
 
     read_csv(data_fp, data_arry);
     //print_data(data_arry);
-    
-    // select initial means
-    init_mu(data_arry, &mu);
     
     // split onto k nodes... later
 
@@ -49,11 +47,15 @@ int main(int argc, char* argv[]) {
     // update mean
     calc_mean(data_arry, labels, mu);
 
+    for(i=0;i<D;i++)
+        printf("%f ",mu[K][i]);
+    printf("\n");
 
-    // clean up    
+    // clean up
+    free(mu[0]);
+    /*    
     free_matrix(&data_arry, N);
     free_matrix(&dist, N);
-free(mu[0]);
-    //free_matrix(&mu, 2);
-    free(labels);
+    //free_matrix(&mu, K);
+    free(labels);*/
 }

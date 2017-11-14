@@ -6,6 +6,7 @@
 
 void init_mu(float ** data_arry, float*** mu) {
     *mu = malloc(K*sizeof(float*));
+    printf("K: %i\n",K);
     int i,j;
     for (i = 0; i < N; i++)
         (*mu)[i] = malloc(D*sizeof(float));
@@ -15,8 +16,8 @@ void init_mu(float ** data_arry, float*** mu) {
     srand(1);
     for (i = 0; i < K; i++) {
         idx = rand()%N;
-        for (j = 0; j < D; j++)
-            (*mu)[i][j] = data_arry[idx][j]; 
+        for (j = 0; j < D; j++) 
+            (*mu)[i][j] = data_arry[idx][j];
     }
 }
 
@@ -49,17 +50,22 @@ void find_min_dist(int *labels, float **dist) {
 }
 
 void calc_mean(float** data_arry, int* labels, float** mu) {
-    int i,j,m, curLabel;
+    int i,j,m,count;
     for (i = 0; i < K; i++) {
-        curLabel = labels[i];
+
         // zero mean vector so we can use running average
         for (m = 0; m < D; m++)
             mu[i][m] = 0;
 
-        for (j = 0; j < N; j++) 
-            if(labels[j] == curLabel) 
-                for (m = 0; m < D; m++) 
-                    mu[i][m] = (data_arry[j][m] + (m)*mu[i][m])/(m+1);
+        for (j = 0; j < N; j++) { 
+            count = 0;
+            if(labels[j] == i) { 
+                for (m = 0; m < D; m++) { 
+                    mu[i][m] = (data_arry[j][m] + count*mu[i][m])/(count+1);
+                    count++;
+                }
+            }
+        }
     }
 }
 

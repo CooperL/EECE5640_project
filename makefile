@@ -2,7 +2,7 @@
 
 
 CC=gcc
-CFLAGS= -fopenmp -lm
+CFLAGS= -fopenmp -O0 -lm
 TARGET=kmeans.c
 OBJ=kmeans 
 
