@@ -1,24 +1,24 @@
 #ifndef DATA_H
 #define DATA_H
 
-#include <stdlib.h>
+#include "project.h"
 
 // FUNCTIONS
-void init_data(float*** data_arry, int N, int D) {
+void init_data(float*** data_arry) {
     *data_arry = malloc(N*sizeof(float*));
     int i;
     for(i=0;i<N;i++)
         (*data_arry)[i] = malloc(D*sizeof(float));
 }
 
-void free_data(float*** data_arry, int N, int D) {
+void free_data(float*** data_arry) {
     int i;
     for(i=0;i<N;i++)
         free((*data_arry)[i]);
     free(*data_arry);
 }
 
-void print_data(float** data_arry, int N, int D) {
+void print_data(float** data_arry) {
     printf("in print\n");
     int i,j;
     for(i=0;i<N;i++) {
@@ -28,9 +28,7 @@ void print_data(float** data_arry, int N, int D) {
     }
 }
 
-void read_csv(FILE* data_file, 
-              float** data_arry, 
-              int N, int D) {
+void read_csv(FILE* data_file, float** data_arry) {
     
     int i,j;
     for(i=0;i<N;i++) {
@@ -39,5 +37,13 @@ void read_csv(FILE* data_file,
         }
     }
  
-} 
+}
+
+void init_dist(float*** dist_arry) {
+    *dist_arry = malloc(N*sizeof(float*));
+    int i;
+    for(i=0;i<N;i++)
+        (*dist_arry)[i] = malloc(K*sizeof(float));
+}
+ 
 #endif
