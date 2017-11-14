@@ -25,6 +25,7 @@ int main(int argc, char* argv[]) {
     int* labels = (int*)malloc(N*sizeof(int));
     float** mu;
     init_mu(data_arry, &mu);
+    free(mu[0]);
     float** dist;
     init_dist(&dist);
     FILE* data_fp = fopen(DATA_FILE,"r");
@@ -52,7 +53,7 @@ int main(int argc, char* argv[]) {
     printf("\n");
 
     // clean up
-    free(mu[0]);
+    //free(mu[0]);
     /*    
     free_matrix(&data_arry, N);
     free_matrix(&dist, N);

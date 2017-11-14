@@ -5,11 +5,11 @@
 #include <math.h>
 
 void init_mu(float ** data_arry, float*** mu) {
-    *mu = malloc(K*sizeof(float*));
+    *mu = (float**) malloc(K*sizeof(float*));
     printf("K: %i\n",K);
     int i,j;
-    for (i = 0; i < N; i++)
-        (*mu)[i] = malloc(D*sizeof(float));
+    for (i = 0; i < K; i++)
+        (*mu)[i] = (float*) malloc(D*sizeof(float));
 
     // pick random index from data
     int idx;

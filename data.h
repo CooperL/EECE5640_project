@@ -5,10 +5,10 @@
 
 // FUNCTIONS
 void init_data(float*** data_arry) {
-    *data_arry = malloc(N*sizeof(float*));
+    *data_arry = (float**) malloc(N*sizeof(float*));
     int i;
     for(i=0;i<N;i++)
-        (*data_arry)[i] = malloc(D*sizeof(float));
+        (*data_arry)[i] = (float*) malloc(D*sizeof(float));
 }
 
 void free_matrix(float*** data_arry, int L) {
