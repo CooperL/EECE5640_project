@@ -6,7 +6,6 @@
 
 void init_mu(float ** data_arry, float*** mu) {
     *mu = (float**) malloc(K*sizeof(float*));
-    printf("K: %i\n",K);
     int i,j;
     for (i = 0; i < K; i++)
         (*mu)[i] = (float*) malloc(D*sizeof(float));
