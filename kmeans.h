@@ -4,6 +4,7 @@
 #include "project.h"
 #include <math.h>
 
+
 void init_mu(float ** data_arry, float*** mu) {
     *mu = (float**) malloc(K*sizeof(float*));
     int i,j;
@@ -18,6 +19,13 @@ void init_mu(float ** data_arry, float*** mu) {
         for (j = 0; j < D; j++) 
             (*mu)[i][j] = data_arry[idx][j];
     }
+}
+
+void init_mu_prev(float*** mu_prev) {
+    *mu_prev = (float**) malloc(K*sizeof(float*));
+    int i,j;
+    for (i = 0; i < K; i++)
+        (*mu_prev)[i] = (float*) malloc(D*sizeof(float));
 }
 
 void calc_distance(float ** data_arry, float ** mu, float ** dist_arry, int node_idx) {
@@ -48,6 +56,13 @@ void find_min_dist(int *labels, float **dist) {
     }
 }
 
+void copy_mu(float** mu, float** mu_prev) {
+    int i,j;
+    for(i = 0; i < K; i++)
+        for(j = 0; j < D; j++)
+            mu_prev[i][j] = mu[i][j];
+}
+
 void calc_mean(float** data_arry, int* labels, float** mu) {
     int i,j,m,count;
     for (i = 0; i < K; i++) {
@@ -66,6 +81,24 @@ void calc_mean(float** data_arry, int* labels, float** mu) {
             }
         }
     }
+}
+
+// return 1 if over threshold, else 0
+int comp_dmu(float **mu, float **mu_prev) {
+    
+    int i,j;
+    float sum = 0;
+    float dist;
+    for (i = 0; i<K; i++) {
+        for (j=0; j<D; j++)
+            sum += pow(mu[i][j]-mu_prev[i][j], 2);
+        dist = sqrtf(sum);
+        printf("dist %f\n", dist);
+        if (dist > THRESHOLD)
+            return 1;
+    }
+    return 0;
+
 }
 
 #endif

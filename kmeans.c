@@ -26,29 +26,41 @@ int main(int argc, char* argv[]) {
     int* labels = (int*)malloc(N*sizeof(int));
     float** mu;
     init_mu(data_arry, &mu);
+    float** mu_prev;
+    init_mu_prev(&mu_prev);
     float** dist;
     init_dist(&dist);
+
     
     FILE* data_fp = fopen(DATA_FILE,"r");
     read_csv(data_fp, data_arry);
     fclose(data_fp);
     //print_data(data_arry);
     
-    // split onto k nodes... later
+    int num_iterations = 0;
+    do {
+        // split onto k nodes... later
 
-    // calculate distance in each row
-    int node_idx;
-    for(node_idx = 0; node_idx < K; node_idx++)
-        calc_distance(data_arry,mu,dist,node_idx);
+        // calculate distance in each row
+        int node_idx;
+        for(node_idx = 0; node_idx < K; node_idx++)
+            calc_distance(data_arry,mu,dist,node_idx);
 
-    // TODO: MPI Reduce
+        // TODO: MPI Reduce
 
-    // select minimum distance and assign new label
-    find_min_dist(labels, dist);
+        // select minimum distance and assign new label
+        find_min_dist(labels, dist);
     
-    // update mean
-    calc_mean(data_arry, labels, mu);
-
+        // update mean
+        copy_mu(mu, mu_prev);
+        calc_mean(data_arry, labels, mu);
+    
+        num_iterations++;
+    }
+    while (num_iterations < MAX_ITERATIONS && comp_dmu(mu, mu_prev));
+   
+    printf("num_iterations: %d\n",num_iterations);
+ 
     // write results to .csv
     FILE* output_fp = fopen(OUTPUT_FILE,"w");
     write_csv(output_fp, labels);
@@ -58,5 +70,6 @@ int main(int argc, char* argv[]) {
     free_matrix(&data_arry, N);
     free_matrix(&dist, N);
     free_matrix(&mu, K);
+    free_matrix(&mu_prev, K);
     free(labels);
 }
