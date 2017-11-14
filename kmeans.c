@@ -2,7 +2,7 @@
 *  kmeans.c
 *  
 *  Compute kmeans for samples.csv
-*  labels are placed in label_out.csv
+*  labels are placed in output.csv
 *
 *  Final project for EECE5640
 *
@@ -20,6 +20,7 @@
 
 int main(int argc, char* argv[]) {
     int i,j;
+
     float** data_arry;
     init_data(&data_arry);
     int* labels = (int*)malloc(N*sizeof(int));
@@ -27,9 +28,10 @@ int main(int argc, char* argv[]) {
     init_mu(data_arry, &mu);
     float** dist;
     init_dist(&dist);
+    
     FILE* data_fp = fopen(DATA_FILE,"r");
-
     read_csv(data_fp, data_arry);
+    fclose(data_fp);
     //print_data(data_arry);
     
     // split onto k nodes... later
@@ -41,11 +43,16 @@ int main(int argc, char* argv[]) {
 
     // TODO: MPI Reduce
 
-    // select minimum distance
+    // select minimum distance and assign new label
     find_min_dist(labels, dist);
     
     // update mean
     calc_mean(data_arry, labels, mu);
+
+    // write results to .csv
+    FILE* output_fp = fopen(OUTPUT_FILE,"w");
+    write_csv(output_fp, labels);
+    fclose(output_fp);
 
     // clean up
     free_matrix(&data_arry, N);

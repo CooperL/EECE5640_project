@@ -28,15 +28,20 @@ void print_data(float** data_arry) {
     }
 }
 
-void read_csv(FILE* data_file, float** data_arry) {
-    
+void read_csv(FILE* data_file, float** data_arry) {   
     int i,j;
     for(i=0;i<N;i++) {
         for(j=0;j<D;j++) {
             fscanf(data_file,"%f,",&(data_arry[i][j]));
         }
     }
- 
+}
+
+void write_csv(FILE* output_file, int* labels) {
+    int i;
+    fprintf(output_file,"%d",labels[0]);
+    for(i=1;i<N;i++)
+        fprintf(output_file,",%d",labels[i]);
 }
 
 void init_dist(float*** dist_arry) {
