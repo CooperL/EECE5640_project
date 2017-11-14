@@ -29,7 +29,6 @@ void print_data(float** data_arry, int N, int D) {
 }
 
 void read_csv(FILE* data_file, 
-              FILE* label_file, 
               float** data_arry, 
               int N, int D) {
     
