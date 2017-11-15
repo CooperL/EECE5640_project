@@ -93,7 +93,6 @@ int comp_dmu(float **mu, float **mu_prev) {
         for (j=0; j<D; j++)
             sum += pow(mu[i][j]-mu_prev[i][j], 2);
         dist = sqrtf(sum);
-        printf("dist %f\n", dist);
         if (dist > THRESHOLD)
             return 1;
     }
