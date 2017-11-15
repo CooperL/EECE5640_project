@@ -4,8 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define N 10
-#define D 5
+#define N 1000
+#define D 3
 #define K 3
 #define DATA_FILE "samples.csv"
 #define LABEL_FILE "clusters.csv"
