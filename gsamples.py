@@ -39,8 +39,9 @@ for i in range(0, k):
   mu[i] = [0]*d
   sigma[i]= [0]*d
   for j in range(0, d):
-    mu[i][j] = uniform(1,5) # fiddle with this to get means
-    sigma[i][j] = uniform(1,5) # fiddle with this to get sigma
+    mu[i][j] = uniform(-5,5) # fiddle with this to get means
+    # sigma[i][j] = uniform(1,5) # fiddle with this to get sigma
+    
 
 # assign samples to clusters
 cluster = [0]*n
@@ -51,7 +52,8 @@ for i in range (0, n):
   # generate data
   for j in range(0, d):
     myc = cluster[i]
-    sample[j] = np.random.normal(mu[myc][j], sigma[myc][j], 1)[0]
+    # sample[j] = np.random.normal(mu[myc][j], sigma[myc][j], 1)[0]
+    sample[j] = np.random.normal(mu[myc][j], 1, 1)[0]
   swrite.writerow(sample)
 
 cwrite.writerow(cluster)
