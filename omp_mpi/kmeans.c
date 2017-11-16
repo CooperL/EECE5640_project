@@ -29,7 +29,7 @@ int main(int argc, char* argv[]) {
     init_mu_prev(&mu_prev);
     float** dist;
     init_dist(&dist);
-
+    
     double start, stop, total_time;
     
     FILE* data_fp = fopen(DATA_FILE,"r");
@@ -41,6 +41,7 @@ int main(int argc, char* argv[]) {
 
     int taskid, numtasks;
 
+    // split into k nodes
     MPI_Init(&argc, &argv);
     MPI_Comm_size(MPI_COMM_WORLD, &numtasks);
     MPI_Comm_rank(MPI_COMM_WORLD, &taskid);
@@ -50,11 +51,10 @@ int main(int argc, char* argv[]) {
         // split onto k nodes... later
 
         // calculate distance in each row
-        int node_idx;
-        for(node_idx = 0; node_idx < K; node_idx++)
-            calc_distance(data_arry,mu,dist,node_idx);
+        for(taskid = 0; taskid < K; taskid++)
+            calc_distance(data_arry,mu,dist,taskid);
 
-        // TODO: MPI Reduce
+        // Send distances back to captain node
 
         // select minimum distance and assign new label
         find_min_dist(labels, dist);
@@ -82,7 +82,7 @@ int main(int argc, char* argv[]) {
 
     // clean up
     free_matrix(&data_arry, N);
-    free_matrix(&dist, N);
+    free_matrix(&dist, K);
     free_matrix(&mu, K);
     free_matrix(&mu_prev, K);
     free(labels);

@@ -45,10 +45,10 @@ void write_csv(FILE* output_file, int* labels) {
 }
 
 void init_dist(float*** dist_arry) {
-    *dist_arry = malloc(N*sizeof(float*));
+    *dist_arry = malloc(K*sizeof(float*));
     int i;
-    for(i=0;i<N;i++)
-        (*dist_arry)[i] = malloc(K*sizeof(float));
+    for(i=0;i<K;i++)
+        (*dist_arry)[i] = malloc(N*sizeof(float));
 }
  
 #endif

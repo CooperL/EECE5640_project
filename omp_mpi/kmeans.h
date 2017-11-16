@@ -36,7 +36,7 @@ void calc_distance(float ** data_arry, float ** mu, float ** dist_arry, int node
         float sum = 0;
         for (j = 0; j < D; j++)
             sum += powf((data_arry[i][j] - mu[node_idx][j]),2);
-        dist_arry[i][node_idx] = sqrtf(sum);
+        dist_arry[node_idx][i] = sqrtf(sum);
     }   
 }
 
@@ -44,13 +44,13 @@ void calc_distance(float ** data_arry, float ** mu, float ** dist_arry, int node
 void find_min_dist(int *labels, float **dist) {
     int i, j;
     
-    #pragma omp parallel for private(j)
+    //#pragma omp parallel for private(j)
     for (i = 0; i < N; i++) {
-        float curSmall = dist[i][0];
+        float curSmall = dist[0][i];
         int small_idx = 0;
         for (j = 1; j < K; j++) {
-            if (curSmall > dist[i][j]) {
-                curSmall = dist[i][j];
+            if (curSmall > dist[j][i]) {
+                curSmall = dist[j][i];
                 small_idx = j;
             }
         }
