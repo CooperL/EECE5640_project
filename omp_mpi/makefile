@@ -1,10 +1,13 @@
 # Simple makefile
 
 
-CC=gcc
-CFLAGS= -fopenmp -O0 -lm
-TARGET=kmeans.c
+CC=mpicc
+CFLAGS=-fopenmp -O0 -lm
+TARGET=kmeans
 OBJ=kmeans 
 
 all:
-	$(CC) $(TARGET) -o $(OBJ) $(CFLAGS)
+	$(CC) $(TARGET).c -o $(OBJ) $(CFLAGS)
+
+run: 
+	mpirun ./$(TARGET)

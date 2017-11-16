@@ -17,7 +17,6 @@
 #include "data.h"
 #include "kmeans.h"
 
-
 int main(int argc, char* argv[]) {
     int i,j;
 
@@ -39,6 +38,12 @@ int main(int argc, char* argv[]) {
     //print_data(data_arry);
     
     start = CLOCK();
+
+    int taskid, numtasks;
+
+    MPI_Init(&argc, &argv);
+    MPI_Comm_size(MPI_COMM_WORLD, &numtasks);
+    MPI_Comm_rank(MPI_COMM_WORLD, &taskid);
 
     int num_iterations = 0;
     do {
@@ -62,6 +67,8 @@ int main(int argc, char* argv[]) {
     }
     while (num_iterations < MAX_ITERATIONS && comp_dmu(mu, mu_prev));
    
+    MPI_Finalize();
+
     stop = CLOCK();
     printf("num_iterations: %d\n",num_iterations);
  

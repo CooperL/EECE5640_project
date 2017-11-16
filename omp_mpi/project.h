@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <omp.h>
+#include <mpi.h>
 
 #define N 1000
 #define D 3
@@ -14,6 +15,7 @@
 #define OUTPUT_FILE "output.csv"
 #define MAX_ITERATIONS 20
 #define THRESHOLD 0.01
+#define MASTER 0
 
 double CLOCK() {
     struct timespec t;
