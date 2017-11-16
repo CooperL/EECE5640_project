@@ -31,12 +31,15 @@ int main(int argc, char* argv[]) {
     float** dist;
     init_dist(&dist);
 
+    double start, stop, total_time;
     
     FILE* data_fp = fopen(DATA_FILE,"r");
     read_csv(data_fp, data_arry);
     fclose(data_fp);
     //print_data(data_arry);
     
+    start = CLOCK();
+
     int num_iterations = 0;
     do {
         // split onto k nodes... later
@@ -59,8 +62,12 @@ int main(int argc, char* argv[]) {
     }
     while (num_iterations < MAX_ITERATIONS && comp_dmu(mu, mu_prev));
    
+    stop = CLOCK();
     printf("num_iterations: %d\n",num_iterations);
  
+    total_time = stop - start;
+    printf("total time: %f\n", total_time);
+
     // write results to .csv
     FILE* output_fp = fopen(OUTPUT_FILE,"w");
     write_csv(output_fp, labels);
