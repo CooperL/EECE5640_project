@@ -2,7 +2,7 @@
 
 
 CC=mpicc
-CFLAGS=-fopenmp -O0 -lm
+CFLAGS=-fopenmp -O3 -lm
 TARGET=kmeans
 OBJ=kmeans
 K=3
