@@ -98,11 +98,16 @@ int main(int argc, char* argv[]) {
 
     MPI_Finalize();
 
+    // force all other processes to return so they don't 
+    // write to output.csv
+    if (taskid != MASTER)
+        return 0;
+
     stop = CLOCK();
     printf("num_iterations: %d\n",num_iterations);
  
     total_time = stop - start;
-    printf("total time: %f\n", total_time);
+    printf("total compute time: %f\n", total_time);
 
     // write results to .csv
     FILE* output_fp = fopen(OUTPUT_FILE,"w");
