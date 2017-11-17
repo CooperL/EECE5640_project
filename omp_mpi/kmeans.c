@@ -50,7 +50,6 @@ int main(int argc, char* argv[]) {
     int num_iterations = 0;
     int not_done = 0;
     do {
-        printf("beginnign of loop iter: %d, taskid: %d\n",num_iterations,taskid);
         // calculate distance in each row
         //for(taskid = 0; taskid < K; taskid++)
         calc_distance(data_arry,mu,dist,taskid);
@@ -78,14 +77,11 @@ int main(int argc, char* argv[]) {
                 MPI_Send(mu[i], D, MPI_FLOAT, i, i, MPI_COMM_WORLD);
         
             num_iterations++;
-            printf("iteration: %d\n",num_iterations);
 
             not_done = num_iterations < MAX_ITERATIONS && comp_dmu(mu, mu_prev);
         }
         else {
-            printf("taskid: %d\n", taskid);
             MPI_Recv(mu[taskid], D, MPI_FLOAT, MASTER, taskid, MPI_COMM_WORLD, &status);
-            printf("after recieve\n");
         }
 
         if (taskid == MASTER) {
@@ -94,12 +90,12 @@ int main(int argc, char* argv[]) {
         }
         else {
             MPI_Recv(mu_prev[taskid], D, MPI_FLOAT, MASTER, taskid, MPI_COMM_WORLD, &status);
-        }  
+        }
+  
         MPI_Bcast(&not_done, 1, MPI_INT, MASTER, MPI_COMM_WORLD);  
     }
     while (not_done);
 
-    printf("after while taskid: %d\n",taskid); 
     MPI_Finalize();
 
     stop = CLOCK();
