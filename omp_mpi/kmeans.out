@@ -1,0 +1,15 @@
+Host 0 -- ip 10.100.9.54 -- ranks 0
+Host 1 -- ip 10.100.9.66 -- ranks 1
+Host 2 -- ip 10.100.9.69 -- ranks 2
+
+ host | 0    1    2
+======|================
+    0 : SHM  TCP  TCP
+    1 : TCP  SHM  TCP
+    2 : TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+num_iterations: 5
+total compute time: 230.984675
