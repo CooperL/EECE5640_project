@@ -26,9 +26,9 @@ n = int(sys.argv[1]) # number of samples
 d = int(sys.argv[2]) # dimensions
 k = int(sys.argv[3]) # clusters
 
-s = open('samples.csv', 'w')
+s = open('/scratch/loughlin.c/samples.csv', 'w')
 # c = open('clusters.csv', 'w', newline='') 
-c = open('cluster.csv', 'w')
+c = open('/scratch/loughlin.c/cluster.csv', 'w')
 swrite = csv.writer(s)
 cwrite = csv.writer(c)
 

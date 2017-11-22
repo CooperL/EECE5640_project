@@ -9,9 +9,9 @@
 #define N 1000
 #define D 3
 #define K 3
-#define DATA_FILE "../samples.csv"
-#define LABEL_FILE "../clusters.csv"
-#define OUTPUT_FILE "../output.csv"
+#define DATA_FILE "/scratch/loughlin.c/samples.csv"
+#define LABEL_FILE "/scratch/loughlin.c/clusters.csv"
+#define OUTPUT_FILE "/scratch/loughlin.c/output.csv"
 #define MAX_ITERATIONS 20
 #define THRESHOLD 0.01
 
