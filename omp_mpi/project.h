@@ -7,9 +7,9 @@
 #include <omp.h>
 #include <mpi.h>
 
-#define N 1000
-#define D 3
-#define K 3
+#define N 1000000
+#define D 100
+#define K 20
 #define DATA_FILE "/scratch/loughlin.c/samples.csv"
 #define LABEL_FILE "/scratch/loughlin.c/clusters.csv"
 #define OUTPUT_FILE "/scratch/loughlin.c/output.csv"

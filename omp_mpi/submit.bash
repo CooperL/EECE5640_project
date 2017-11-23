@@ -24,13 +24,13 @@ workdir=`pwd`
 time="01:00:00"
 
 # number of tasks you are requesting
-ntasks=3
+ntasks=20
 
 # partition to use
 partition="ser-par-10g-3"
 
 # number of nodes to distribute n tasks across
-nodes=3
+nodes=20
 
 #############################################
 #

@@ -1,15 +1,26 @@
-Host 0 -- ip 10.100.9.54 -- ranks 0
-Host 1 -- ip 10.100.9.66 -- ranks 1
-Host 2 -- ip 10.100.9.69 -- ranks 2
-
- host | 0    1    2
-======|================
-    0 : SHM  TCP  TCP
-    1 : TCP  SHM  TCP
-    2 : TCP  TCP  SHM
+Host 0 -- ip 10.100.9.53 -- ranks 0
+Host 1 -- ip 10.100.9.54 -- ranks 1
+Host 2 -- ip 10.100.9.58 -- ranks 2
+Host 3 -- ip 10.100.9.60 -- ranks 3
+Host 4 -- ip 10.100.9.61 -- ranks 4
+Host 5 -- ip 10.100.9.62 -- ranks 5
+Host 6 -- ip 10.100.9.63 -- ranks 6
+Host 7 -- ip 10.100.9.64 -- ranks 7
+Host 8 -- ip 10.100.9.65 -- ranks 8
+Host 9 -- ip 10.100.9.66 -- ranks 9
+Host 10 -- ip 10.100.9.69 -- ranks 10
+Host 11 -- ip 10.100.9.70 -- ranks 11
+Host 12 -- ip 10.100.9.71 -- ranks 12
+Host 13 -- ip 10.100.9.72 -- ranks 13
+Host 14 -- ip 10.100.9.73 -- ranks 14
+Host 15 -- ip 10.100.9.74 -- ranks 15
+Host 16 -- ip 10.100.9.75 -- ranks 16
+Host 17 -- ip 10.100.9.76 -- ranks 17
+Host 18 -- ip 10.100.9.77 -- ranks 18
+Host 19 -- ip 10.100.9.78 -- ranks 19
 
  Prot -  All Intra-node communication is: SHM
  Prot -  All Inter-node communication is: TCP
 
-num_iterations: 5
-total compute time: 230.984675
+num_iterations: 13
+total compute time: 15223.099872
